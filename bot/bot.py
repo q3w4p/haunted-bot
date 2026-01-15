@@ -68,6 +68,11 @@ class FakeRedis:
             return None
         return self._lists[key][index]
     
+    async def expire(self, key, seconds):
+        """Expire is not supported in FakeRedis (in-memory fallback)"""
+        # In-memory storage doesn't support expiry, but we return True to avoid errors
+        return True
+    
     async def ping(self):
         return True
 

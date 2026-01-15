@@ -56,23 +56,30 @@ class HauntedContext(commands.Context):
 
     def _format_example(self, usage):
         example = usage
-        example = example.replace("<user>", "[@qnok](https://discord.com/invite/hauntedbot)")
-        example = example.replace("<member>", "[@qnok](https://discord.com/invite/hauntedbot)")
+        # User/Member mentions with ANSI blue color
+        example = example.replace("<user>", "\u001b[0;34m@qnok\u001b[0m")
+        example = example.replace("<member>", "\u001b[0;34m@qnok\u001b[0m")
         example = example.replace("<role>", "@Members")
         example = example.replace("<channel>", "#general")
         example = example.replace("<reason>", "breaking rules")
         example = example.replace("<time>", "1h")
-        example = example.replace("<url>", "`https://example.com`")
-        example = example.replace("<image>", "`https://example.png`")
+        example = example.replace("<duration>", "1h")
+        example = example.replace("<url>", "https://example.com")
+        example = example.replace("<image>", "https://example.png")
         example = example.replace("<message>", "Hello!")
         example = example.replace("<amount>", "10")
+        example = example.replace("<number>", "10")
         example = example.replace("<status>", "on")
         example = example.replace("<flags>", "--threshold=3")
         example = example.replace("<punishment>", "ban")
         example = example.replace("<threshold>", "3")
-        example = example.replace("<duration>", "1h")
         example = example.replace("<query>", "song name")
         example = example.replace("<text>", "Hello world")
+        example = example.replace("<name>", "MyName")
+        # Code examples for embed/code parameters
+        example = example.replace("<code>", "{embed}$v{color: #D4BCD2}$v{title: haunted}$v{description: you can edit this description}")
+        example = example.replace("<embed>", "{embed}$v{color: #D4BCD2}$v{title: haunted}$v{description: you can edit this description}")
+        # Remove remaining brackets
         example = re.sub(r'[\[\]<>]', '', example)
         return example
 
@@ -285,6 +292,37 @@ class HelpCommand(commands.HelpCommand):
         embed.set_footer(text=f"Module: {command.cog.qualified_name if command.cog else 'No Category'} • Aliases: {', '.join(command.aliases) if command.aliases else 'None'}")
         await ctx.reply(embed=embed, mention_author=False)
 
+    def _format_example(self, usage):
+        """Format usage examples with proper replacements"""
+        example = usage
+        # User/Member mentions with ANSI blue color
+        example = example.replace("<user>", "\u001b[0;34m@qnok\u001b[0m")
+        example = example.replace("<member>", "\u001b[0;34m@qnok\u001b[0m")
+        example = example.replace("<role>", "@Members")
+        example = example.replace("<channel>", "#general")
+        example = example.replace("<reason>", "breaking rules")
+        example = example.replace("<time>", "1h")
+        example = example.replace("<duration>", "1h")
+        example = example.replace("<url>", "https://example.com")
+        example = example.replace("<image>", "https://example.png")
+        example = example.replace("<message>", "Hello!")
+        example = example.replace("<amount>", "10")
+        example = example.replace("<number>", "10")
+        example = example.replace("<status>", "on")
+        example = example.replace("<flags>", "--threshold=3")
+        example = example.replace("<punishment>", "ban")
+        example = example.replace("<threshold>", "3")
+        example = example.replace("<query>", "song name")
+        example = example.replace("<text>", "Hello world")
+        example = example.replace("<name>", "MyName")
+        # Code examples for embed/code parameters
+        example = example.replace("<code>", "{embed}$v{color: #D4BCD2}$v{title: haunted}$v{description: you can edit this description}")
+        example = example.replace("<embed>", "{embed}$v{color: #D4BCD2}$v{title: haunted}$v{description: you can edit this description}")
+        # Remove remaining brackets
+        import re
+        example = re.sub(r'[\[\]<>]', '', example)
+        return example
+    
     async def send_error_message(self, error):
         await self.context.warning(error)
 
