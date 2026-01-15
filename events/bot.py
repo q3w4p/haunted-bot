@@ -127,54 +127,54 @@ class Bot(commands.Cog):
             try: await channel.send(embed=embed)
             except: return
       
-    @commands.Cog.listener('on_guild_join')
-    async def join_message(self, guild: discord.Guild):
-        
-        check = await self.bot.db.fetchrow("SELECT * FROM gblacklist WHERE guild_id = {}".format(guild.id))
-        if check: return
-        
-        if channel := discord.utils.find(
-            lambda c: c.permissions_for(guild.me).embed_links, guild.text_channels
-        ):
-        
-            
-            embed = Embed(
-                color=self.bot.color,
-                title="Getting started with haunted",
-                description=(
-                    "Hey! Thanks for your interest in **haunted bot**. "
-                    "The following will provide you with some tips on how to get started with your server!"
-                ),
-            )
-            embed.set_thumbnail(url=self.bot.user.display_avatar)
-
-            embed.add_field(
-                name="**Prefix 🤖**",
-                value=(
-                    "The most important thing is my prefix. "
-                    f"It is set to `;` by default for this server and it is also customizable, "
-                    "so if you don't like this prefix, you can always change it with `prefix` command!"
-                ),
-                inline=False,
-            )
-            embed.add_field(
-                name="**Moderation System 🛡️**",
-                value=(
-                    "If you would like to use moderation commands, such as `jail`, `ban`, `kick` and so much more... "
-                    "please run the `setmod` command to quickly set up the moderation system."
-                ),
-                inline=False,
-            )
-            embed.add_field(
-                name="**Documentation and Help 📚**",
-                value=(
-                    "You can always visit our [documentation](https://docs.haunted.cc)"
-                    " and view the list of commands that are available [here](https://haunted.cc/commands)"
-                    " - and if that isn't enough, feel free to join our [Support Server](https://discord.gg/haunted) for extra assistance!"
-                ),
-            )
-            
-            await channel.send(embed=embed)
+#     @commands.Cog.listener('on_guild_join')
+#     async def join_message(self, guild: discord.Guild):
+#         
+#         check = await self.bot.db.fetchrow("SELECT * FROM gblacklist WHERE guild_id = {}".format(guild.id))
+#         if check: return
+#         
+#         if channel := discord.utils.find(
+#             lambda c: c.permissions_for(guild.me).embed_links, guild.text_channels
+#         ):
+#         
+#             
+#             embed = Embed(
+#                 color=self.bot.color,
+#                 title="Getting started with haunted",
+#                 description=(
+#                     "Hey! Thanks for your interest in **haunted bot**. "
+#                     "The following will provide you with some tips on how to get started with your server!"
+#                 ),
+#             )
+#             embed.set_thumbnail(url=self.bot.user.display_avatar)
+# 
+#             embed.add_field(
+#                 name="**Prefix 🤖**",
+#                 value=(
+#                     "The most important thing is my prefix. "
+#                     f"It is set to `;` by default for this server and it is also customizable, "
+#                     "so if you don't like this prefix, you can always change it with `prefix` command!"
+#                 ),
+#                 inline=False,
+#             )
+#             embed.add_field(
+#                 name="**Moderation System 🛡️**",
+#                 value=(
+#                     "If you would like to use moderation commands, such as `jail`, `ban`, `kick` and so much more... "
+#                     "please run the `setmod` command to quickly set up the moderation system."
+#                 ),
+#                 inline=False,
+#             )
+#             embed.add_field(
+#                 name="**Documentation and Help 📚**",
+#                 value=(
+#                     "You can always visit our [documentation](https://docs.haunted.cc)"
+#                     " and view the list of commands that are available [here](https://haunted.cc/commands)"
+#                     " - and if that isn't enough, feel free to join our [Support Server](https://discord.gg/haunted) for extra assistance!"
+#                 ),
+#             )
+#             
+#             await channel.send(embed=embed)
 
     @commands.Cog.listener('on_guild_join')
     async def gblacklist_check(self, guild: discord.Guild):
