@@ -54,9 +54,9 @@ async def shard_stats(self):
       except Exception as e:
             log.error(f"Exception occurred while sending shard data: {e}")
 
-@tasks.loop(seconds=5)
-async def servers_check(bot: commands.Bot):
-    return [await guild.leave() for guild in bot.guilds if guild.id not in [x['guild_id'] for x in await bot.db.fetch("SELECT guild_id FROM authorize")]]
+# @tasks.loop(seconds=5)
+# async def servers_check(bot: commands.Bot):
+#     return [await guild.leave() for guild in bot.guilds if guild.id not in [x['guild_id'] for x in await bot.db.fetch("SELECT guild_id FROM authorize")]]
 
 class Bot(commands.Cog): 
     def __init__(self, bot: commands.Bot):
@@ -70,7 +70,7 @@ class Bot(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self): 
-        servers_check.start(self.bot)
+        # servers_check.start(self.bot)  # Disabled - no authorization required
         # shard_stats.start(self)  # Disabled - external API not available
         
     @commands.Cog.listener('on_ready')
