@@ -1,0 +1,38 @@
+# Haunted Bot Dependencies
+
+# Discord.py and related
+git+https://github.com/resentbot/discord.py.git
+git+https://github.com/sheslitforme/Discord-iOS
+git+https://github.com/prettylittlelies/discord_paginator@227fd915dd19d09422d80bd3aba601ea486d89f5
+
+# API wrappers
+git+https://github.com/resentbot/uwuipy.git
+git+https://github.com/cop-discord/rivalapi.git
+git+https://github.com/resentbot/resent.api.git
+git+https://github.com/resentbot/twscrape.git
+
+# Core dependencies
+jishaku
+asyncpg
+aiohttp
+humanfriendly
+python-dotenv
+Pillow
+psutil
+
+# Additional modules
+yt-dlp
+timezonefinder
+arrow
+python-dateutil
+requests
+aiogtts
+geopy
+deep-translator
+emoji
+pomice
+imagehash
+redis
+
+# For fun/utility commands
+kureAPI
