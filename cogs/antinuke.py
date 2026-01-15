@@ -174,8 +174,12 @@ class antinuke(commands.Cog):
         if module.capitalize() not in self.modules: return await ctx.warning(f"The module `{module}` is not a valid **Anti-Nuke module**.")
         
         an_module = await AntiNukeModule.from_database(self.bot.db, ctx.guild.id, module.capitalize())
-        an_module.threshold = threshold
+        if not an_module:
+            # Create the module if it doesn't exist
+            await self.bot.db.execute("INSERT INTO antinuke_modules (guild_id, module, enabled, threshold, punishment) VALUES ($1, $2, $3, $4, $5)", ctx.guild.id, module.capitalize(), True, threshold, 'ban')
+            return await ctx.success(f"Anti-Nuke module `{module}` has been created with threshold `{threshold}`.")
         
+        an_module.threshold = threshold
         await an_module.update(self.bot.db, ctx.guild.id)
         
         return await ctx.success(f"Anti-Nuke module `{module}` threshold has been set to `{threshold}`.")

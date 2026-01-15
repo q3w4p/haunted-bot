@@ -219,7 +219,7 @@ class moderation(commands.Cog):
   @Mod.is_mod_configured()
   @commands.command(description="timeout members from your server", brief="moderate members", usage="@qnok <reason>")
   @commands.has_permissions(moderate_members=True)
-  async def mute(self, ctx: commands.Context, member: discord.Member, time: ValidTime=int, *, reason: str="No reason provided"): 
+  async def mute(self, ctx: commands.Context, member: discord.Member, time: ValidTime, *, reason: str="No reason provided"): 
       if isinstance(member, discord.Member) and not Permissions.check_hierarchy(self.bot, ctx.author, member): return await ctx.warning(f"You cannot mute*{member.mention}")
       if member.is_timed_out(): return await ctx.error(f"{member.mention} is **already** muted")
       if member.guild_permissions.administrator: return await ctx.warning("You **cannot** mute an administrator")

@@ -110,6 +110,9 @@ class Haunted(commands.AutoShardedBot):
         self.ext = Client(self)
         self.redis = None  # Will be set in setup
         
+        # Support server invite
+        self.support_server = "https://discord.gg/hauntedbot"
+        
         # Cooldowns
         self.m_cd = commands.CooldownMapping.from_cooldown(1, 5, commands.BucketType.member)
         self.c_cd = commands.CooldownMapping.from_cooldown(1, 5, commands.BucketType.channel)

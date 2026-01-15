@@ -16,10 +16,14 @@ manemoji = "<:information:1263727043967717428>"
 trashemoji = "<:trash:1263727144832602164>"
 
 async def check_owner(ctx: commands.Context):
+            if not ctx.author.voice or not ctx.author.voice.channel:
+                await ctx.bot.ext.warning(ctx, "You are not in a voice channel")
+                return False
             check = await ctx.bot.db.fetchrow("SELECT * FROM vcs WHERE voice = $1 AND user_id = $2", ctx.author.voice.channel.id, ctx.author.id)
             if check is None: 
              await ctx.bot.ext.warning(ctx, "You are not the owner of this voice channel")
-             return True                
+             return False
+            return True                
 
 async def check_voice(ctx: commands.Context):
           check = await ctx.bot.db.fetchrow("SELECT * FROM voicemaster WHERE guild_id = $1", ctx.guild.id) 
