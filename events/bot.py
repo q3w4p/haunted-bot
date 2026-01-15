@@ -176,13 +176,13 @@ class Bot(commands.Cog):
 #             
 #             await channel.send(embed=embed)
 
-    @commands.Cog.listener('on_guild_join')
-    async def gblacklist_check(self, guild: discord.Guild):
-        
-        check = await self.bot.db.fetchrow("SELECT * FROM gblacklist WHERE guild_id = {}".format(guild.id))
-        
-        if check is not None:
-            await guild.leave()
+#     @commands.Cog.listener('on_guild_join')
+#     async def gblacklist_check(self, guild: discord.Guild):
+#         
+#         check = await self.bot.db.fetchrow("SELECT * FROM gblacklist WHERE guild_id = {}".format(guild.id))
+#         
+#         if check is not None:
+#             await guild.leave()
             
 #     @commands.Cog.listener('on_guild_join')
 #     async def authorization_check(self, guild: discord.Guild):
