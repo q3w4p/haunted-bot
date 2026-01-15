@@ -32,7 +32,8 @@ async def clear_caches(bot: commands.Bot):
 class lastfm(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.lastfmhandler = Handler("43693facbb24d1ac893a7d33846b15cc")
+        # Use Last.fm API key from environment or default
+        self.lastfmhandler = Handler(os.getenv("LASTFM_API_KEY", "20d1a03e02f807edb0ec8702490976d1"))
         self.lastfm_crowns = {}
         self.globalwhoknows_cache = {}
         self.session = Session()

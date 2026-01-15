@@ -12,8 +12,13 @@ logging.basicConfig(
     ]
 )
 
-# Bot token - load from environment variable
+# Bot token - load from environment variable or .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 TOKEN = os.getenv("TOKEN")
+if not TOKEN:
+    raise ValueError("TOKEN environment variable is not set. Please create a .env file with your bot token.")
 
 os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
 os.environ["JISHAKU_NO_DM_TRACEBACK"] = "True"
@@ -109,6 +114,11 @@ async def restricted_command(ctx: commands.Context):
   return True
 
 async def main():
+    if not TOKEN:
+        print("❌ ERROR: Bot token not found!")
+        print("Please create a .env file with TOKEN=your_bot_token_here")
+        return
+    
     async with bot:
         # Setup database connection
         await bot.create_db_pool()

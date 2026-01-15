@@ -18,7 +18,8 @@ class utility(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot 
         self.tz = Timezone(self.bot)
-        self.lastfmhandler = Handler("43693facbb24d1ac893a7d33846b15cc")
+        # Use Last.fm API key from environment or default
+        self.lastfmhandler = Handler(os.getenv("LASTFM_API_KEY", "20d1a03e02f807edb0ec8702490976d1"))
         self.cake = "🎂"
         self.weather_key = "64581e6f1d7d49ae834142709230804"
         self.a = TimeConverter
